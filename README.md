@@ -18,8 +18,8 @@ Run Flask web server.
 
 Run on Heroku web server.
 
-Coming soon..
-
+    Coming soon
+    
 # Privacy Policy
 This app do not store any data of any user in any server.
 # weatherchatbot
