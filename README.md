@@ -9,8 +9,8 @@ Clone this repository. Install the requirements.
 Add this environments variables.
 
     WEATHER_API_KEY # OpenWeatherMap.org api token
-    FB_VERIFY_TOKEN # Facebook Messenger webhook verify token (Webhook settings panel)
-    FB_ACCESS_TOKEN # Facebook Messenger access token
+    VERIFY_TOKEN # Facebook Messenger webhook verify token (Webhook settings panel)
+    ACCESS_TOKEN # Facebook Messenger access token
 
 Run Flask web server.
 
