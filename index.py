@@ -5,7 +5,7 @@ import requests
 
 from flask import Flask, request
 
-from cities_list1 import CITIES
+from citieslist2 import CITIES
 from messages import get_message, search_keyword
 
 token = os.environ.get('ACCESS_TOKEN')
