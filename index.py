@@ -81,9 +81,11 @@ def send_weather_info(sender, **kwargs):
                                                 'metric',
                                                 'pt')
 
+    print(url)
+
     r = requests.get(url)
     response = r.json()
-    log(response)
+    
 
     print(response)
 
@@ -222,9 +224,7 @@ def webhook():
         return "Wrong Verify Token"
     return "Nothing"
 
-def log(message):  # simple wrapper for logging to stdout on heroku
-    print str("message")
-    sys.stdout.flush()
+
     
 if __name__ == '__main__':
     app.run(debug=True)
