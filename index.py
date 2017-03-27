@@ -78,6 +78,7 @@ def send_weather_info(sender, **kwargs):
 
     r = requests.get(url)
     response = r.json()
+    log(response)
 
     print(response)
 
