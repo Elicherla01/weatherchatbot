@@ -8,7 +8,7 @@ from flask import Flask, request
 from citieslist2 import CITIES
 from messages import get_message, search_keyword
 
-token = os.environ.get('FB_ACCESS_TOKEN')
+token = os.environ.get('ACCESS_TOKEN')
 api_key = os.environ.get('WEATHER_API_KEY')
 app = Flask(__name__)
 
@@ -226,7 +226,7 @@ def webhook():
         except Exception as e:
             print(traceback.format_exc())
     elif request.method == 'GET':
-        if request.args.get('hub.verify_token') == os.environ.get('FB_VERIFY_TOKEN'):
+        if request.args.get('hub.verify_token') == os.environ.get('VERIFY_TOKEN'):
             return request.args.get('hub.challenge')
         return "Wrong Verify Token"
     return "Nothing"
