@@ -3,6 +3,11 @@ import traceback
 import json
 import requests
 
+import sys
+
+import requests
+
+
 from flask import Flask, request
 
 from citieslist2 import CITIES
