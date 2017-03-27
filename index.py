@@ -5,10 +5,10 @@ import requests
 
 from flask import Flask, request
 
-from citieslist2 import CITIES
+from cities_list1 import CITIES
 from messages import get_message, search_keyword
 
-token = os.environ.get('ACCESS_TOKEN')
+token = os.environ.get('FB_ACCESS_TOKEN')
 api_key = os.environ.get('WEATHER_API_KEY')
 app = Flask(__name__)
 
@@ -135,10 +135,11 @@ def send_weather_info(sender, **kwargs):
                                   "elements": elements,
                                   "buttons": [
                                       {
-                                          "title": "Please search again",
+                                          "title": "Weather",
                                           "type": "postback",
                                           "payload": "do_it_again"
                                       }
+                                    
                                   ]
                               })
 
@@ -174,6 +175,7 @@ def webhook():
                 if payload == 'do_it_again':
                     payload = location_quick_reply(sender)
                     send_message(payload)
+
 
             if 'attachments' in message:
                 if 'payload' in message['attachments'][0]:
@@ -224,7 +226,7 @@ def webhook():
         except Exception as e:
             print(traceback.format_exc())
     elif request.method == 'GET':
-        if request.args.get('hub.verify_token') == os.environ.get('VERIFY_TOKEN'):
+        if request.args.get('hub.verify_token') == os.environ.get('FB_VERIFY_TOKEN'):
             return request.args.get('hub.challenge')
         return "Wrong Verify Token"
     return "Nothing"
