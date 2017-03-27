@@ -68,7 +68,7 @@ def send_weather_info(sender, **kwargs):
     if latitude and longitude:
         query = 'lat={}&lon={}'.format(latitude, longitude)
     elif city_name:
-        query = 'q={}'.format(city_name.title())
+        query = 'q={},in'.format(city_name.title())
 
     url = 'http://api.openweathermap.org/data/2.5/weather?' \
           '{}&appid={}&units={}&lang={}'.format(query,
@@ -91,7 +91,7 @@ def send_weather_info(sender, **kwargs):
 
     elements = [{
         'title': name,
-        'subtitle': 'Temperature: {} dgrees'.format(str(weather['temp']).replace('.',',')),
+        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp']).replace('.',',')),
         'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
     }]
 
