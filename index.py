@@ -218,7 +218,7 @@ def webhook():
     return "Nothing"
 
 def log(message):  # simple wrapper for logging to stdout on heroku
-    print str(message)
+    print str("message")
     sys.stdout.flush()
     
 if __name__ == '__main__':
