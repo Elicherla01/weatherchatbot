@@ -68,7 +68,7 @@ def send_weather_info(sender, **kwargs):
     if latitude and longitude:
         query = 'lat={}&lon={}'.format(latitude, longitude)
     elif city_name:
-        query = 'q={}'.format(city_name.title())
+        query = 'q={},br'.format(city_name.title())
 
     url = 'http://api.openweathermap.org/data/2.5/weather?' \
           '{}&appid={}&units={}&lang={}'.format(query,
@@ -76,13 +76,7 @@ def send_weather_info(sender, **kwargs):
                                                 'metric',
                                                 'pt')
 
-    url1 = 'http://api.openweathermap.org/data/2.5/weather?' \
-          '{}&appid={}&units={}&lang={}'.format(query,
-                                                api_key,
-                                                'metric',
-                                                'pt')                                             
-
-    r = requests.get(url1)
+    r = requests.get(url)
     response = r.json()
 
     print(response)
@@ -95,31 +89,24 @@ def send_weather_info(sender, **kwargs):
     weather = response['main']
     wind = response['wind']
 
-    elements1 = [{
-        'title': name,
-        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp']).replace('.',',')),
-        'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
-            }]
-
     elements = [{
         'title': name,
-        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
-        'image_url': 'http://icons.iconarchive.com/icons/icons-land/weather/256/Sunny-icon.png'
-        }]
+        'subtitle': 'Temperatura: {} graus'.format(str(weather['temp']).replace('.',',')),
+        'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
+    }]
 
     for info in response['weather']:
-        #description = info['description'].capitalize()
-        description = "Other details"
+        description = info['description'].capitalize()
         icon = info['icon']
 
-        weather_data = 'Humidity: {}%\n' \
-                       'Pressure: {}\n' \
-                       'Wind Speed: {}'.format(weather['humidity'],
+        weather_data = 'Umidade: {}%\n' \
+                       'Pressão: {}\n' \
+                       'Velocidade do vento: {}'.format(weather['humidity'],
                                                           weather['pressure'],
                                                           wind['speed'])
 
         if 'visibility' in response:
-            weather_data = '{}\n Visibility: {}'.format(weather_data, response['visibility'])
+            weather_data = '{}\n Visibilidade: {}'.format(weather_data, response['visibility'])
 
         elements.append({
             'title': description,
@@ -135,11 +122,10 @@ def send_weather_info(sender, **kwargs):
                                   "elements": elements,
                                   "buttons": [
                                       {
-                                          "title": "Weather",
+                                          "title": "Fazer nova pesquisa",
                                           "type": "postback",
                                           "payload": "do_it_again"
                                       }
-                                    
                                   ]
                               })
 
@@ -163,7 +149,7 @@ def webhook():
                 # Action when user first enters the chat
                 payload = data['entry'][0]['messaging'][0]['postback']['payload']
                 if payload == 'begin_button':
-                    message = send_text(sender, 'Hello, how are you? Lets start')
+                    message = send_text(sender, 'Olá, tudo bem? Vamos começar?')
                     send_message(message)
 
                     payload = location_quick_reply(sender)
@@ -175,7 +161,6 @@ def webhook():
                 if payload == 'do_it_again':
                     payload = location_quick_reply(sender)
                     send_message(payload)
-
 
             if 'attachments' in message:
                 if 'payload' in message['attachments'][0]:
