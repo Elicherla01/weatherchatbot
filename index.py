@@ -3,14 +3,9 @@ import traceback
 import json
 import requests
 
-import sys
-
-import requests
-
-
 from flask import Flask, request
 
-from citieslist2 import CITIES
+from cities_list1 import CITIES
 from messages import get_message, search_keyword
 
 token = os.environ.get('ACCESS_TOKEN')
@@ -81,11 +76,14 @@ def send_weather_info(sender, **kwargs):
                                                 'metric',
                                                 'pt')
 
-    print(url)
+    url1 = 'http://api.openweathermap.org/data/2.5/weather?' \
+          '{}&appid={}&units={}&lang={}'.format(query,
+                                                api_key,
+                                                'metric',
+                                                'pt')                                             
 
-    r = requests.get(url)
+    r = requests.get(url1)
     response = r.json()
-    
 
     print(response)
 
@@ -97,14 +95,21 @@ def send_weather_info(sender, **kwargs):
     weather = response['main']
     wind = response['wind']
 
-    elements = [{
+    elements1 = [{
         'title': name,
         'subtitle': 'Temperature: {} degrees'.format(str(weather['temp']).replace('.',',')),
         'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
-    }]
+            }]
+
+    elements = [{
+        'title': name,
+        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
+        'image_url': 'http://icons.iconarchive.com/icons/icons-land/weather/256/Sunny-icon.png'
+        }]
 
     for info in response['weather']:
-        description = info['description'].capitalize()
+        #description = info['description'].capitalize()
+        description = "Other details"
         icon = info['icon']
 
         weather_data = 'Humidity: {}%\n' \
@@ -130,10 +135,11 @@ def send_weather_info(sender, **kwargs):
                                   "elements": elements,
                                   "buttons": [
                                       {
-                                          "title": "New Search",
+                                          "title": "Weather",
                                           "type": "postback",
                                           "payload": "do_it_again"
                                       }
+                                    
                                   ]
                               })
 
@@ -157,7 +163,7 @@ def webhook():
                 # Action when user first enters the chat
                 payload = data['entry'][0]['messaging'][0]['postback']['payload']
                 if payload == 'begin_button':
-                    message = send_text(sender, 'Hello, how are you? Let us start?')
+                    message = send_text(sender, 'Hello, how are you? Lets start')
                     send_message(message)
 
                     payload = location_quick_reply(sender)
@@ -169,6 +175,7 @@ def webhook():
                 if payload == 'do_it_again':
                     payload = location_quick_reply(sender)
                     send_message(payload)
+
 
             if 'attachments' in message:
                 if 'payload' in message['attachments'][0]:
@@ -224,7 +231,5 @@ def webhook():
         return "Wrong Verify Token"
     return "Nothing"
 
-
-    
 if __name__ == '__main__':
     app.run(debug=True)
