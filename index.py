@@ -106,7 +106,7 @@ def send_weather_info(sender, **kwargs):
     
     elements = [{
         'title': name,
-        'subtitle': 'Temperature not entered: {} degrees'.format(str(weather['temp'])),
+        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
         'image_url': 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clouds-icon.png'
         }]
     
