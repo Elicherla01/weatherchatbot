@@ -74,13 +74,13 @@ def send_weather_info(sender, **kwargs):
           '{}&appid={}&units={}&lang={}'.format(query,
                                                 api_key,
                                                 'metric',
-                                                'pt')
+                                                'en')
 
     url1 = 'http://api.openweathermap.org/data/2.5/weather?' \
           '{}&appid={}&units={}&lang={}'.format(query,
                                                 api_key,
                                                 'metric',
-                                                'pt')                                             
+                                                'en')                                             
 
     r = requests.get(url1)
     response = r.json()
@@ -101,15 +101,34 @@ def send_weather_info(sender, **kwargs):
         'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
             }]
 
+    temp_text = str(weather['temp'])
+    temp_float = float(temp_text)
+    
     elements = [{
+        'title': name,
+        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
+        'image_url': 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clouds-icon.png'
+        }]
+    
+    if temp_float > 20.00:
+        elements = [{
         'title': name,
         'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
         'image_url': 'http://icons.iconarchive.com/icons/icons-land/weather/256/Sunny-icon.png'
         }]
+    
+    elif temp_float < 10.00:
+        elements = [{
+        'title': name,
+        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
+        'image_url': 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clouds-night-icon.png'
+        }]
 
+    
+    
     for info in response['weather']:
-        #description = info['description'].capitalize()
-        description = "Other details"
+        description = info['description'].capitalize()
+        #description = "Other details"
         icon = info['icon']
 
         weather_data = 'Humidity: {}%\n' \
