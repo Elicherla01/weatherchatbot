@@ -101,9 +101,16 @@ def send_weather_info(sender, **kwargs):
         'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
             }]
 
-    temperature = str(weather['temp'])
+    temp_text = str(weather['temp'])
+    temp_float = float(temp_text)
     
-    if temperature > 15.00:
+    elements = [{
+        'title': name,
+        'subtitle': 'Temperature not entered: {} degrees'.format(str(weather['temp'])),
+        'image_url': 'http://icons.iconarchive.com/icons/icons-land/weather/256/Sunny-icon.png'
+        }]
+    
+    if temp_float > 15.00:
         elements = [{
         'title': name,
         'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
