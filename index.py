@@ -107,27 +107,23 @@ def send_weather_info(sender, **kwargs):
     elements = [{
         'title': name,
         'subtitle': 'Temperature not entered: {} degrees'.format(str(weather['temp'])),
-        'image_url': 'http://icons.iconarchive.com/icons/icons-land/weather/256/Sunny-icon.png'
+        'image_url': 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clouds-icon.png'
         }]
     
-    if temp_float > 25.00:
+    if temp_float > 20.00:
         elements = [{
         'title': name,
         'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
         'image_url': 'http://icons.iconarchive.com/icons/icons-land/weather/256/Sunny-icon.png'
         }]
-    elif temp_float < 5.00:
+    
+    elif temp_float < 10.00:
         elements = [{
         'title': name,
         'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
         'image_url': 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clouds-night-icon.png'
         }]
-    else:
-        elements = [{
-        'title': name,
-        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
-        'image_url': 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clouds-icon.png'
-        }]
+
     
     
     for info in response['weather']:
