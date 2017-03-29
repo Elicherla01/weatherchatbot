@@ -74,13 +74,13 @@ def send_weather_info(sender, **kwargs):
           '{}&appid={}&units={}&lang={}'.format(query,
                                                 api_key,
                                                 'metric',
-                                                'pt')
+                                                'en')
 
     url1 = 'http://api.openweathermap.org/data/2.5/weather?' \
           '{}&appid={}&units={}&lang={}'.format(query,
                                                 api_key,
                                                 'metric',
-                                                'pt')                                             
+                                                'en')                                             
 
     r = requests.get(url1)
     response = r.json()
@@ -127,8 +127,8 @@ def send_weather_info(sender, **kwargs):
     
     
     for info in response['weather']:
-        #description = info['description'].capitalize()
-        description = "Other details"
+        description = info['description'].capitalize()
+        #description = "Other details"
         icon = info['icon']
 
         weather_data = 'Humidity: {}%\n' \
