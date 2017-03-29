@@ -97,7 +97,7 @@ def send_weather_info(sender, **kwargs):
 
     elements1 = [{
         'title': name,
-        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp']).replace('.',',')),
+        'subtitle': 'Temperature: {} in Degrees'.format(str(weather['temp']).replace('.',',')),
         'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
             }]
 
