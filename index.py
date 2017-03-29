@@ -101,12 +101,22 @@ def send_weather_info(sender, **kwargs):
         'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
             }]
 
-    elements = [{
+    temperature = str(weather['temp'])
+    
+    if temperature > 15.00:
+        elements = [{
         'title': name,
         'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
         'image_url': 'http://icons.iconarchive.com/icons/icons-land/weather/256/Sunny-icon.png'
         }]
-
+    elif:
+        elements = [{
+        'title': name,
+        'subtitle': 'Temperature: {} degrees'.format(str(weather['temp'])),
+        'image_url': 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clouds-icon.png'
+        }]
+    
+    
     for info in response['weather']:
         #description = info['description'].capitalize()
         description = "Other details"
