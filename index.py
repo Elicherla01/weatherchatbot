@@ -239,8 +239,8 @@ def webhook():
                     message = send_text(sender, get_message('greetings'))
                     send_message(message)
                     
-                    message = send_text(sender, get_message('not-a-city'))
-                    send_message(message)
+                    #message = send_text(sender, get_message('not-a-city'))
+                    #send_message(message)
 
                 # Send location button
                 payload = location_quick_reply(sender)
