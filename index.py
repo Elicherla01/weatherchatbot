@@ -236,6 +236,9 @@ def webhook():
                     message = send_text(sender, get_message('greetings'))
                     send_message(message)
                 else:
+                    message = send_text(sender, get_message('greetings'))
+                    send_message(message)
+                    
                     message = send_text(sender, get_message('not-a-city'))
                     send_message(message)
 
