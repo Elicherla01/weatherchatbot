@@ -233,7 +233,7 @@ def webhook():
 
                 if chat_message:
                     # if found keyword, reply with chat stuff
-                    message = send_text(sender, chat_message)
+                    message = send_text(sender, get_message('greetings'))
                     send_message(message)
                 else:
                     message = send_text(sender, get_message('not-a-city'))
