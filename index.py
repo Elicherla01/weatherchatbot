@@ -152,14 +152,7 @@ def send_weather_info(sender, **kwargs):
                                           "title": "Weather",
                                           "type": "postback",
                                           "payload": "do_it_again"
-                                      },
-                                      
-                                      {
-                                          
-                                          "type":"web_url",
-                                          "url":"https://www.tesco.com",
-                                          "title":"Show Website"
-                                       }
+                                      }
                                       
                                   ]
                               })
