@@ -154,11 +154,7 @@ def send_weather_info(sender, **kwargs):
                                           "payload": "do_it_again"
                                       }
                                        
-                                      {
-                                          "title": "Weather2",
-                                          "type": "postback",
-                                          "payload": "do_it_again"
-                                      }
+                                      
                                     
                                   ]
                               })
