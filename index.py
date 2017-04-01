@@ -141,7 +141,7 @@ def send_weather_info(sender, **kwargs):
             'image_url': 'http://openweathermap.org/img/w/{}.png'.format(icon)
         })
 
-    payload = send_attachment(sender,
+    payload1 = send_attachment(sender,
                               'template',
                               {
                                   "template_type": "list",
@@ -156,7 +156,28 @@ def send_weather_info(sender, **kwargs):
                                       
                                   ]
                               })
+    
+    payload = send_attachment(sender,
+                              'template',
+                              {
+                                 "template_type":"button",
+                                 "text":"What do you want to do next?",
+                                 "buttons":[
+                                    {
+                                        "type":"web_url",
+                                        "url":"https://www.tesco.com",
+                                        "title":"Show Website"
+                                    },
+                                    {
+                                        "type":"postback",
+                                        "title":"weather",
+                                        "payload":"do_it_again"
+                                    }
+                                    ]
+                                   })
 
+    
+    
     send_message(payload)
     return None
 
