@@ -95,11 +95,6 @@ def send_weather_info(sender, **kwargs):
     weather = response['main']
     wind = response['wind']
 
-    elements1 = [{
-        'title': name,
-        'subtitle': 'Temperature: {} in Degrees'.format(str(weather['temp']).replace('.',',')),
-        'image_url': 'https://cdn-images-1.medium.com/max/800/1*LkbHjhacSRDNDzupX7pgEQ.jpeg'
-            }]
 
     temp_text = str(weather['temp'])
     temp_float = float(temp_text)
@@ -155,6 +150,12 @@ def send_weather_info(sender, **kwargs):
                                   "buttons": [
                                       {
                                           "title": "Weather",
+                                          "type": "postback",
+                                          "payload": "do_it_again"
+                                      }
+                                       
+                                      {
+                                          "title": "Weather2",
                                           "type": "postback",
                                           "payload": "do_it_again"
                                       }
