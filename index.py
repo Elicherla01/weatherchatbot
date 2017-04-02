@@ -141,7 +141,7 @@ def send_weather_info(sender, **kwargs):
             'image_url': 'http://openweathermap.org/img/w/{}.png'.format(icon)
         })
 
-    payload1 = send_attachment(sender,
+    payload = send_attachment(sender,
                               'template',
                               {
                                   "template_type": "list",
@@ -157,7 +157,7 @@ def send_weather_info(sender, **kwargs):
                                   ]
                               })
     
-    payload = send_attachment(sender,
+    payload1 = send_attachment(sender,
                               'template',
                               {
                                  "template_type":"button",
